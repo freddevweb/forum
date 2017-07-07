@@ -29,7 +29,6 @@ CREATE TABLE Sujet (
     auteur_id INT UNSIGNED NOT NULL,
     titre varchar(255) not null, 
     def text not null,
-	nom VARCHAR(150) NOT NULL,
     dateCreation datetime,
     photo varchar(255),
     

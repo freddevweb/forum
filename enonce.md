@@ -33,7 +33,7 @@ et chacun à son rythme avancera jusqu'au point ou il pourra.
     peut avoir plusieurs tags.
 
 
-
+    ***** php 
 5)  Donc les utilisateurs pourrons s'enregistrer, se connecter et récupérer leurs password
     (on va ignorer l'envoie d'email pour l'instant)
     Il faut vérifier que
