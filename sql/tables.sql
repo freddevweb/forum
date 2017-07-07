@@ -30,7 +30,6 @@ CREATE TABLE Sujet (
     titre varchar(255) not null, 
     def text not null,
     dateCreation datetime,
-    photo varchar(255),
     
 	PRIMARY KEY(id)
 );
