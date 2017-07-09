@@ -4,6 +4,23 @@ CREATE DATABASE EDN_forum;
 
 USE EDN_forum;
 
+
+
+/*
+* Alfonso: comme on a commenté sur le password. Effectivement il doit être hashé pour ne pas
+* Être reconnaissable même si on a accès à la base. SHA1 n'est plus un standard cependant car il n'est
+* plus considéré comme sur
+* dans mon cas j'utilise la fonction hash("sha256",$password) qui génère 64 caractêres.
+
+*  Dans ce dossier SQL pense à me faire un petit backup (Dans Mysql workbench dans le menu
+*  MANAGEMENT sur la gauche "Data Export" comme ça j'aurai qu'un fichier SQL a lancé
+*  Tes bases SQL sont solides je te laisse faire un peu plus de code avant de pouvoir commenter
+*  un peu plus sur le code
+*
+*  Observation: n'essaie pas trop de faire de requête en avance et plutot essaie de les faire
+*  Au fûr et à mesure que tu en as besoin
+*/
+
 CREATE TABLE Utilisateur (
 	id INT UNSIGNED AUTO_INCREMENT,
 	pseudo VARCHAR(100) NOT NULL,
