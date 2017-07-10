@@ -1,10 +1,10 @@
 <?php
 
 
-    //include "../models/functions.php";
+    include "../models/functions.php";
 
-    var_dump($_POST);
-/*
+
+
     $avatar = $_POST['avatar'];
     var_dump($avatar);
     die();
@@ -20,7 +20,7 @@
         $pseudoLength = count($pseudo);
         $regex = '#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#';
 
-        
+        var_dump($_POST);
         if ( $pseudoLength > 4 ){
             if (preg_match($regex) == $email) {
                 if($passconfirm == $pass){
@@ -48,7 +48,7 @@
 
 
 
-    header("$header.$msg");*/
+    header("$header.$msg");
 
 ?>
    
