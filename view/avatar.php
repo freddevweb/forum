@@ -1,10 +1,3 @@
-<?php
-
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +11,9 @@
 </head>
 <body>
     
-    <form action="services/avatar_service.php" method="post">
-        <!--<label for="avatar"></label>
-        <input type="file" id="avatar" name"pseudo" />-->
+    <form enctype="multipart/form-data" action="services/avatar_service.php" method="post">
+        <label for="avatar"></label>
+        <input type="file" id="avatar" name="avatar" />
         
         <input type="submit" value="envoyer">
     </form>

@@ -18,7 +18,7 @@
         
         <div>
             <h3>Se connecter</h3>
-            <form action="login.php" method="post">
+            <form action="services/login_service.php" method="post">
                 <table>
                     <tr>
                         <td>
@@ -52,6 +52,13 @@
                 <p>S'inscrire<p>
             </a>
         </div>
+    </div>
+    <div>
+        <?php
+            if (isset($_SESSION['message'])){
+                echo "<p>".$_SESSION['message']."</p>";
+            }
+        ?>
     </div>
     
 </body>

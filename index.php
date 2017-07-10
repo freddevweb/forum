@@ -1,8 +1,7 @@
-
-
 <?php 
 
-// add session
+session_start();
+
 
 include_once("models/functions.php"); // appelle la page fonction
 
@@ -14,22 +13,16 @@ include_once("models/functions.php"); // appelle la page fonction
             case 'profile' :
                 include("view/profile.php");
                 break;
-            case 'profile' :
-                include("view/profile.php");
+            case 'inscription' :
+                include("view/inscription.php");
                 break;
-            case 'categorie.php' :
-                // $user = getUser();
-                // $description = getDescription();
-                // $text = getMessage();
-                // $nbreUtilisateur = getNbreUtilisateur();
+            case 'categorie' :
                 include("view/categorie.php");
                 break;
             case 'avatar' :
                 include("view/avatar.php");
                 break;
-
             case 'form' :
-                // $user = getUser();
                 include("view/form.php");
                 break;
             case 'accueil' :

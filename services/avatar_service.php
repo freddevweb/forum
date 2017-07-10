@@ -1,58 +1,50 @@
-
-
 <?php
 
-var_dump($_POST);
+    include "../models/functions.php";
 
 
-/*
-//////////////////////////////////////////////////////////////
-/////////////////////////////// fichier
-//////////////////////////////////////////////////////////////
+    $_SESSION["name"]= 'Alfonso';
 
-$target_path = "uploads/"; // chemin absolu pour creer l'image
+    $name = $_SESSION['name'];
 
-$target_path = $target_path . basename( $_FILES['uploadedfile']['name']);
-
-if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) { // faire bouger du fichier temporaire vers la cible
-
-    echo "le fichier ".  basename( $_FILES['uploadedfile']['name']).
-        " a été téléchargé";
-
-} else {
-
-    echo "Une erreur est survenu pendant le processus, réessayez plus tard!";
-
-}
+    $target_path = "../assets/avatar/";
 
 
-die();
-
-// Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
-if (isset($_FILES['uploadedfile']) AND $_FILES['uploadedfile']['error'] == 0)
-{
-    // Testons si le fichier n'est pas trop gros
-    if ($_FILES['uploadedfile']['size'] <= 1000000)
+    if (isset($_FILES['avatar']) AND $_FILES['avatar']['error'] == 0)
     {
-        // Testons si l'extension est autorisée
-        $infosfichier = pathinfo($_FILES['uploadedfile']['name']);
 
-        $extension_upload = $infosfichier['extension'];
-        $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
-        if (in_array($extension_upload, $extensions_autorisees))
+        if ($_FILES['avatar']['size'] <= 1000000)
         {
-            // On peut valider le fichier et le stocker définitivement
-            $newName = hash('sha1',$_FILES['uploadedfile']['name']).'.'.$extension_upload;
-            move_uploaded_file($_FILES['uploadedfile']['tmp_name'], 'uploads/' . basename($newName));
-            echo "Transfert du fichier complété !";
+        
+            $infosfichier = pathinfo($_FILES['avatar']['name']);
+
+            $extension_upload = $infosfichier['extension'];
+            $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
+            if (in_array($extension_upload, $extensions_autorisees))
+            {
+                
+                $newName = $name.'.'.$extension_upload;
+                move_uploaded_file($_FILES['avatar']['tmp_name'], '../assets/avatar/' . basename($newName));
+                echo "Transfert du fichier complété ! <br>";
+                
+                $path_avatar = "assets/avatar/".basename($newName);
+
+                $connect = new pdo_connect();
+                $savePathAvatar = $connect -> enregistrerAvatar( $name, $path_avatar);
+                
+                
+
+                $link = '';
+            }
+        }else{
+            echo 'Erreur fichier trop gros';
+            $link = '';
         }
     }else{
-        echo 'Erreur fichier trop gros';
+        $erreur = $_FILES['avatar']['error'];
+        echo "Le transfert du fichier a subis une erreur de code $erreur";
+        $link = '';
     }
-}else{
-    $erreur = $_FILES['uploadedfile']['error'];
-    echo "Le transfert du fichier a subis une erreur de code $erreur";
-}
 
-*/
+
 ?>

@@ -1,4 +1,11 @@
+<?php
+ 
+    
+    $err = $_SESSION['erreur'];
 
+    var_dump($err);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,6 +78,39 @@
             </tr>
         </table>
     </form>
+    <div>
+        <?php
+            
+            if (isset($err)){
+                $nbre = count($err);
+                
+                if ($nbre > 1){
+                    $val = "s";
+                }
+
+                echo "<ul>"."Il y a ". $nbre ." erreur".$val ." dans la saisie du formulaire : ";
+                if (in_array(10, $err)){
+                    echo "<li>"."Vous n'avez pas saisi le même mot de passe"."</li>";
+                }
+                if (in_array(1, $err)){
+                    echo "<li>"."L'E-mail n'est pas correct"."</li>";
+                }
+                if (in_array(2, $err)){
+                    echo "<li>"."Le pseudo est déja pris"."</li>";
+                }
+                if (in_array(3, $err)){
+                    echo "<li>"."Le pseudo n'est pas assez long"."</li>";
+                }
+                echo "</ul>";
+            }
+
+            /*$err0 = ("Vous n'avez pas saisi le même mot de passe");
+            $err1 = ("L'E-mail n'est pas correct");
+            $err2 = ("Le pseudo est déja pris");
+            $err3 = ("Le pseudo n'est pas assez long");*/
+
+        ?>
+    </div>
 
 
 </body>
