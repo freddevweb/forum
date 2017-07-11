@@ -6,7 +6,8 @@
 
 
 /*
-
+    * faire le retour des erreurs de modify
+    * faire le retour des erreurs de avatar
     * faire verif si loggé pour pas faire d'inscription
     * faire la page profil pour modifier les données utilisateur
     * cacher les inputs qui ne doivent pas etre montrés
