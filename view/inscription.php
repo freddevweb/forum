@@ -3,8 +3,6 @@
     
     $err = $_SESSION['erreur'];
 
-    var_dump($err);
-
 ?>
 
 <!DOCTYPE html>
