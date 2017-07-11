@@ -19,7 +19,9 @@
 
     <div>
         <?php
-
+        /* Alfonso: plutot que d'appeler l'objet ici je l'aurai fait depuis le controleur (index.php)
+         * j'aurai mit le tout dans une variable selectCat
+         * */
         $connect = new pdo_connect();
         $selectCat = $connect -> selectCategorie();
 

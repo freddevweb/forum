@@ -37,6 +37,9 @@
                 $link = '';
             }
         }else{
+            /* Alfonso: je suppose que ces echo sont temporaires
+             * il faut évidemment rapporté ça au user au niveau du formulaire.
+             * */
             echo 'Erreur fichier trop gros';
             $link = '';
         }

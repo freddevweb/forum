@@ -19,7 +19,13 @@
         // connexion a la base de donnée
         private function init(){
 
-
+            /* Alfonso: bien vu pour l'objet pour les crédentiel on aurait peut-être du les
+             * mettre dans un fichier à part et ne pas les pusher pour que tout le monde ne les vois pas
+             * par contre pour ce projet tu peux les garder ici
+             *
+             * pour la connexion tu pourrais déclarer une variable privée dans l'objet
+             * et t'en servir à chaque fois.
+             * */
             $connexion = new PDO('mysql:host=localhost:8889;dbname=EDN_forum;charset=utf8', 'root', 'root');
             $connexion->query("EDN_forum");
 

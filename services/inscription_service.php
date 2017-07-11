@@ -49,6 +49,9 @@
 
     }
 
+
+     /*Alfonso: très bon controles.
+      * */
     if ( empty($erreur) ){
 
         $connect = new pdo_connect();

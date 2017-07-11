@@ -21,6 +21,10 @@ USE EDN_forum;
 *  Au fûr et à mesure que tu en as besoin
 */
 
+/*********************************
+ * Alfonso Update: Essaie de tout me dumper sur un seul fichier SQL quand tu feras ton backup
+*/
+
 CREATE TABLE Utilisateur (
 	id INT UNSIGNED AUTO_INCREMENT,
 	pseudo VARCHAR(100) NOT NULL,

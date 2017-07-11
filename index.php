@@ -17,6 +17,12 @@ include_once("models/functions.php"); // appelle la page fonction
                 include("view/inscription.php");
                 break;
             case 'categorie' :
+                /* Alfonso: il faudrait faire ici tes appels de categories
+                 * $pdo = new connect_pdo()
+                 * $selectCat = $pdo->selectCategorie()
+                 *
+                 * C'est le contrôleur qui gère ce genre d'appel. On ne doit pas les voir dans les vues
+                 * */
                 include("view/categorie.php");
                 break;
             case 'avatar' :
