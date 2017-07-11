@@ -8,8 +8,9 @@
     if ( isset( $_POST['user']) && isset( $_POST['pass'])){
 
         
-        $pseudo = $_POST['user'];
-        $pass = $_POST['pass'];
+        $pseudo = htmlspecialchars($_POST['user']);
+        $password = htmlspecialchars($_POST['pass']);  
+        $pass = hash("sha256",$password);// 64 caracteres
 
         $connect = new pdo_connect();
         $control = $connect -> login ($pseudo, $pass);
@@ -28,24 +29,6 @@
     header("location:$link");
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>

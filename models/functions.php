@@ -19,7 +19,13 @@
         // connexion a la base de donnée
         private function init(){
 
-
+            /* Alfonso: bien vu pour l'objet pour les crédentiel on aurait peut-être du les
+             * mettre dans un fichier à part et ne pas les pusher pour que tout le monde ne les vois pas
+             * par contre pour ce projet tu peux les garder ici
+             *
+             * pour la connexion tu pourrais déclarer une variable privée dans l'objet
+             * et t'en servir à chaque fois.
+             * */
             $connexion = new PDO('mysql:host=localhost:8889;dbname=EDN_forum;charset=utf8', 'root', 'root');
             $connexion->query("EDN_forum");
 
@@ -64,7 +70,7 @@
 
             $passctrl = $getPass -> fetch();
 
-            if ($passctrl['uPassword'] ==  $pass){
+            if (sha256("sha256" ,$passctrl['uPassword']) ==  $pass){
                 $flagsession = TRUE;
             }
             else{
@@ -92,33 +98,94 @@
 
             $connexion = $this->init();
 
-            $categorie = $connexion -> prepare ("SELECT nom, photo FROM Categorie ORDER BY nom");
+            $categorie = $connexion -> prepare ("SELECT nom FROM Categorie ORDER BY nom");
             $categorie -> execute();
 
-            $cat = $categorie->fetch();
+            $cat = $categorie->fetchAll(PDO::FETCH_ASSOC);
 
             return $cat;
 
         }
 
-
         public function selectSujet($cat){
 
             $connexion = $this->init();
 
-            $sujet = $connexion -> prepare ("SELECT nom, photo FROM Sujet WHERE categorie_id = (SELECT id FROM Categorie WHERE nom = :nom ) ORDER BY dateCreation");
+            $sujet = $connexion -> prepare (
+                "SELECT s.titre, s.def, s.photo, s.dateCreation, u.pseudo, u.avatar
+                 FROM Sujet AS s
+                    INNER JOIN Utilisateur AS u ON u.id=s.auteur_id 
+                WHERE categorie_id = (SELECT id FROM Categorie WHERE nom = :nom ) ORDER BY dateCreation DESC");
             $sujet -> execute(array(
-                'nom' => $cat
+                'nom' => $cat,
             ));
 
-            $cat = $sujet -> fetch();
+            $suj = $sujet->fetchAll(PDO::FETCH_ASSOC);
+
+            return $suj;
 
         }
 
+        public function selectSujetByTitre($sujetNom){
 
+            $connexion = $this->init();
 
+            $sujet = $connexion -> prepare (
+                "SELECT s.titre, s.def, s.photo, s.dateCreation, u.pseudo, u.avatar FROM Sujet AS s INNER JOIN Utilisateur AS u ON u.id=s.auteur_id WHERE s.id = (SELECT id FROM Sujet WHERE titre = :nom )");
+            $sujet -> execute(array(
+                'nom' => $sujetNom,
+            ));
 
+            if (!empty($sujet)){
+                $suj = $sujet->fetchAll(PDO::FETCH_ASSOC);
+                return $suj;
+            }
+            else {
+                return;
+            }
 
+        }
+        
+
+        public function selectPost($sujet){
+
+            $connexion = $this->init();
+
+            $post = $connexion -> prepare ("SELECT p.titre, p.contenu, p.date_publication, u.pseudo, u.avatar FROM Post AS p INNER JOIN Utilisateur AS u ON u.id = p.auteur_id WHERE sujet_id = (SELECT id FROM Sujet WHERE titre = :titre ) ORDER BY p.date_publication");
+            $post -> execute(array(
+                'titre' => $sujet
+            ));
+            
+            $getPpost = $post->fetchAll(PDO::FETCH_ASSOC);
+            return $getPpost;
+            
+        }
+
+        public function postSend ($user, $post, $sujet ){
+
+            $connexion = $this->init();
+
+            $sendPost = $connexion -> prepare ("INSERT INTO Post SET sujet_id = (SELECT id FROM Sujet WHERE titre = :sujet), auteur_id = (SELECT id FROM Utilisateur WHERE pseudo = :user), contenu = :msg, date_publication = NOW()");
+            $sendPost -> execute(array(
+                'user' => $user,
+                'msg' => $post,
+                'sujet' => $sujet
+            ));
+
+        }
+
+        public function getProfil ($user){
+
+            $connexion = $this->init();
+
+            $getuser = $connexion -> prepare ("SELECT pseudo, email, avatar FROM utilisateur WHERE id = (SELECT id FROM utilisateur WHERE pseudo = :pseudo )");
+            $getuser -> execute(array(
+                'pseudo' => $user
+            ));
+            
+            $userget = $getuser->fetch();
+            return $userget;
+        }
 
 
 

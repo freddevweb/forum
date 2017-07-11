@@ -21,11 +21,15 @@ USE EDN_forum;
 *  Au fûr et à mesure que tu en as besoin
 */
 
+/*********************************
+ * Alfonso Update: Essaie de tout me dumper sur un seul fichier SQL quand tu feras ton backup
+*/
+
 CREATE TABLE Utilisateur (
 	id INT UNSIGNED AUTO_INCREMENT,
 	pseudo VARCHAR(100) NOT NULL,
 	email VARCHAR(200) NOT NULL,
-	uPassword CHAR(40) NOT NULL,  -- le mot de passe sera hashé avec sha1, ce qui donne toujours une chaîne de 40 caractères
+	uPassword CHAR(64) NOT NULL,  -- le mot de passe sera hashé avec sha1, ce qui donne toujours une chaîne de 40 caractères
     avatar varchar(255),
     dateInscription date,
     
@@ -35,7 +39,6 @@ CREATE TABLE Utilisateur (
 CREATE TABLE Categorie (
 	id INT UNSIGNED AUTO_INCREMENT,
 	nom VARCHAR(150) NOT NULL,
-    photo varchar(255),
     
 	PRIMARY KEY(id)
 );
@@ -46,6 +49,7 @@ CREATE TABLE Sujet (
     auteur_id INT UNSIGNED NOT NULL,
     titre varchar(255) not null, 
     def text not null,
+    photo varchar(255),
     dateCreation datetime,
     
 	PRIMARY KEY(id)
@@ -58,8 +62,6 @@ CREATE TABLE Post (
 	id INT UNSIGNED AUTO_INCREMENT,
     sujet_id int unsigned not null,
     auteur_id INT UNSIGNED NOT NULL,
-	titre VARCHAR(200) NOT NULL,
-	resume TEXT,
 	contenu TEXT NOT NULL,
 	date_publication DATETIME NOT NULL,
     
@@ -88,5 +90,42 @@ ON Utilisateur(email);
 
 CREATE UNIQUE INDEX unique_pseudo
 ON Utilisateur(pseudo);
+
+CREATE UNIQUE INDEX unique_nom
+ON Categorie(nom);
+
+
+
+
+INSERT INTO Utilisateur (pseudo, email, uPassword, avatar, dateInscription) VALUES
+('Pierre', 'Pierre@email.com', 'mar', '' , '2010-04-02' ),
+('Paul', 'Paul@email.com', 'mar', '' , '2010-04-02'),
+('Alfonso', 'Alfonso@email.com', 'fernandez', '' , '2010-04-02'),
+('Fred', 'Fred@email.com', 'mas', '' , '2010-04-02');
+
+-- Insertion de categories
+
+INSERT INTO categorie (nom) VALUES
+('HTML/css'),
+('Bootstrap'),
+('Git'),
+('Gulp vs Grunt'),
+('JavaScript'),
+('PHP'),
+('MySql'),
+('Ski');
+
+
+
+insert into Sujet ( categorie_id, auteur_id, titre, def, photo, dateCreation) values
+(1, 1, 'le html/css pour les null', 'Cour présentant les doux amis du developpeur : le HTML et le CSS','assets/suj_img/html5-css3.png', '2010-04-02 15:28:22'),
+(4, 1, 'Gulp the best', 'Utiliser gulp c\'est mieux que grunt n\'est ce pas alfonso ?' ,'assets/suj_img/featured.gif', '2010-04-02 15:28:22'),
+(6, 2, 'PHP objet','PHP Objet vous allez transpirer du sang !!!','assets/suj_img/PHP.png', '2010-04-02 15:28:22'),
+(8, 4, 'On ski où ces vacances ?', ' Possibilités : Argentine, Alpes, Népal, si vous avez d\'autres suggestions ...' ,'assets/suj_img/ski.jpg', '2010-04-02 15:28:22'),
+(7, 3, 'Le sql pour les dingues', 'Utilisation des transactions et des triggers, conseption avancée des regex complexes AHAHAH' ,'assets/suj_img/sql.png', '2010-04-02 15:28:22');
+
+
+
+
 
 

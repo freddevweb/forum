@@ -1,5 +1,18 @@
+SELECT pseudo, email, avatar 
+FROM utilisateur 
+WHERE id = (SELECT id FROM utilisateur WHERE pseudo = "alfonso" );
 
-	# affichage
+
+
+
+
+
+
+
+
+
+   
+select email from utilisateur where id = (select id from utilisateur where pseudo = "Alfonso");
 
 # element de l'utilisateur pour le profil et modif profil
 select pseudo, email, uPassword, avatar, dateInscription  from Utilisateur where id = '';

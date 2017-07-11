@@ -1,8 +1,7 @@
 <?php
 
     $user = $_SESSION['name'];
-    $cat = $_GET['cat'];
-
+    $sujet = $_GET['sujet'];
 
 ?>
 <!DOCTYPE html>
@@ -17,13 +16,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-
     <div>
         <? include "nav.php";  ?>
     </div>
 
     <div>  <!--menu latéral-->
         <div>
+            <p>
+               <a href="index.php?page=categorie">Categories</a>
+            </p>
             <?php
 
             $connect = new pdo_connect();
@@ -35,7 +36,7 @@
             for ($i = 0 ; $i < $nbreCat; $i++){
 
                 foreach($selectCat[$i] as $key => $value){
-                    echo "<a href='index.php?page=sujet&cat=".$value."'>";
+                    echo "<a href='index.php?page=page&cat=".$value."'>";
                     echo $value;
                     echo "</a>";
                     echo "</br>";
@@ -48,33 +49,16 @@
             ?>
         </div>
         <div>
-            <form enctype="multipart/form-data" action="services/sujet_service.php" method="post">
-                <label for="titre">Titre : 
+            <form action="services/sujet_service.php" method="post">
+                <label for="post">Post
                     <br />
-                    <input type="text" id="titre" name="titre" required />
+                    <textarea type="text" id="post" name="post" required ></textarea>
                 </label>
+                <input type="text" name="sujet" value="<? echo $sujet?>" >
                 <br />
-                <label for="def">Description
-                    <br />
-                    <textarea type="text" id="def" name="def" required ></textarea>
-                </label>
-                <br />
-                <label for="img">Ajouter une image
-                    <br />
-                    <input type="file" id="img" name="image_sujet" />
-                </label>
-                <br />
-                <input type="text" name="sujet" value="<? echo $cat ?>">
                 <button type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-send"></span> Envoyer 
                 </button>
-                <br />                
-                <a href="#">
-                    <button type="button" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-erase"></span> Réinitialiser 
-                    </button>
-                </a>
-
             </tr>
         </table>
     </form>
@@ -85,10 +69,9 @@
 
         <?php
 
+            // sujet
             $connect = new pdo_connect();
-            $selectSujetCat = $connect -> selectSujet($cat);
-            
-            
+            $selectSujetCat = $connect -> selectSujetByTitre($sujet);
 
             $nbreSuj = count($selectSujetCat);
 
@@ -98,7 +81,7 @@
 
                     foreach($selectSujetCat[$j] as $key => $value){
                         if ($key == 'titre'){
-                            echo "<a href='index.php?page=post&sujet=".$value."'>";
+                            echo "<a href='index.php?page=page&sujet=".$value."'>";
                             echo $value;
                             echo "</a>";
                         }
@@ -118,6 +101,40 @@
             }
             else {
                 echo "Il n'y a aucun sujet à afficher";
+                echo "</br>";
+                echo "Créez en un !";
+            }
+
+
+
+
+
+            // posts
+
+            $connect = new pdo_connect();
+            $selectPost = $connect -> selectPost($sujet);
+            
+            
+
+            $nbrePost = count($selectPost);
+
+            if($nbrePost != 0 ){
+                
+                for ($k = 0 ; $k < $nbrePost; $k++){
+
+                    foreach($selectPost[$k] as $key => $value){
+                    
+                        echo "</br>";
+                        echo $key;
+                        echo "</br>";
+                        echo $value;
+                        echo "</br>";
+                    
+                    }
+                }
+            }
+            else {
+                echo "Il n'y a aucun post à afficher";
                 echo "</br>";
                 echo "Créez en un !";
             }

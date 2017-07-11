@@ -2,9 +2,6 @@
 
     include "../models/functions.php";
 
-
-    $_SESSION["name"]= 'Alfonso';
-
     $name = $_SESSION['name'];
 
     $target_path = "../assets/avatar/";
@@ -25,7 +22,7 @@
                 
                 $newName = $name.'.'.$extension_upload;
                 move_uploaded_file($_FILES['avatar']['tmp_name'], '../assets/avatar/' . basename($newName));
-                echo "Transfert du fichier complété ! <br>";
+                $msg = "Transfert du fichier complété ! <br>";
                 
                 $path_avatar = "assets/avatar/".basename($newName);
 
@@ -34,17 +31,25 @@
                 
                 
 
-                $link = '';
+                session_destroy();
+                $link = "../index.php?page=accueil";
             }
         }else{
-            echo 'Erreur fichier trop gros';
-            $link = '';
+            /* Alfonso: je suppose que ces echo sont temporaires
+             * il faut évidemment rapporté ça au user au niveau du formulaire.
+             fred : c'etait juste pour avoir un retour comme l'exemple du cours et pouvoir mettre a la place de l'(echo) une variable message
+             * */
+            $msg = 'Erreur fichier trop gros';
+            $link = "../index.php?page=avatar";
         }
     }else{
         $erreur = $_FILES['avatar']['error'];
-        echo "Le transfert du fichier a subis une erreur de code $erreur";
-        $link = '';
+        $msg = "Le transfert du fichier a subis une erreur de code $erreur";
+        $link = "../index.php?page=avatar";
     }
 
+    $_SESSION['msg'] = $msg;
+
+    header("location:$link");
 
 ?>

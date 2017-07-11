@@ -1,5 +1,4 @@
 <?php
- 
     
     $err = $_SESSION['erreur'];
 
@@ -67,7 +66,7 @@
                     </button>
                 </td>
                 <td>
-                    <a href="#">
+                    <a href="index.php?page=inscription">
                         <button type="button" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-erase"></span> Réinitialiser 
                         </button>
@@ -101,11 +100,6 @@
                 }
                 echo "</ul>";
             }
-
-            /*$err0 = ("Vous n'avez pas saisi le même mot de passe");
-            $err1 = ("L'E-mail n'est pas correct");
-            $err2 = ("Le pseudo est déja pris");
-            $err3 = ("Le pseudo n'est pas assez long");*/
 
         ?>
     </div>

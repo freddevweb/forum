@@ -12,3 +12,10 @@ values ('categorie_id, auteur_id, titre, def, dateCreation, photo');
 insert into Post (sujet_id, auteur_id, titre, contenu, date_publication)
 values ('sujet_id, auteur_id, titre, contenu, date_publication');
 
+
+
+
+UPDATE Utilisateur SET avatar="assets/avatar/Alfonso.jpg" where pseudo='Alfonso';
+
+
+

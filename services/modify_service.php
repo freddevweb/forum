@@ -52,9 +52,7 @@
     }
 
 
-     /*Alfonso: très bon controles.
-        cool merci !!
-      * */
+     
     if ( empty($erreur) ){
 
         $connect = new pdo_connect();
@@ -86,19 +84,6 @@
 
 ?>
    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
