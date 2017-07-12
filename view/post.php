@@ -1,12 +1,5 @@
 <?php
 
-    $user = $_SESSION['name'];
-    $sujet = $_GET['sujet'];
-
-    $connect = new pdo_connect();
-    $connected = $connect -> isConnected($user);
-
-
     if($connected === FALSE){
         header("location:index.php?page=accueil");
     }
@@ -22,136 +15,214 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
     <div>
         <? include "nav.php";  ?>
     </div>
 
-    <div>  <!--menu latéral-->
-        <div>
-            <p>
-               <a href="index.php?page=categorie">Categories</a>
-            </p>
-            <?php
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
 
-            $connect = new pdo_connect();
-            $selectCat = $connect -> selectCategorie();
-            
+                <div class="col-lg-2">  <!--menu latéral-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <legend>Catégories :</legend>
 
-            $nbreCat = count($selectCat);
+                            <ul class="list-unstyled">
+                            <?php
 
-            for ($i = 0 ; $i < $nbreCat; $i++){
+                                for ($i = 0 ; $i < $nbreCat; $i++){
 
-                foreach($selectCat[$i] as $key => $value){
-                    echo "<a href='index.php?page=page&cat=".$value."'>";
-                    echo $value;
-                    echo "</a>";
-                    echo "</br>";
-                    
-                }
-            }
+                                    foreach($selectCat[$i] as $key => $value){
+                                        ?>
+                                            <li>
+                                                <a href=<?php echo '"index.php?page=sujet&cat='.$value.'"' ?>>
+                                                    <h4>
+                                                        <strong>
+                                                            <?php echo $value; ?>
+                                                        </strong>
+                                                    </h4>
+                                                </a>
+                                            </li>
+                                        <?php
+                                        
+                                    }
+                                }
+                            ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <form action="services/sujet_service.php" method="post">
+                                <legend>Commenter :</legend>
+                                <div class="form-group">
+                                    <label for="post">Post</label>
+                                    <textarea type="text" id="post" name="post" required class="form-control" ></textarea>
+                                </div>
+                                
+                                <input type="text" name="sujet" value="<? echo $sujet?>" class="hidden">
+                                
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-send"></span> Envoyer 
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8"> <!--corp de page-->
+                    <div class="row">
+                        <div class="jumbotron">
+
+                            <?php
+
+                                if($nbreSuj != 0 ){
+
+                                    for ($j = 0 ; $j < $nbreSuj; $j++){
+                                        ?>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-9">
+                                                        <a href=<? echo '"index.php?page=post&sujet='.$selectSujetCat[$j]['titre'].'"'?> class="text-center">
+                                                            <h3><? echo $selectSujetCat[$j]['titre']?></h3>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <table>
+                                                            <tr>
+                                                                <td>Publié le :</td>
+                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>A :</td>
+                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-2 ">
+                                                    <a href=<? echo '"index.php?page=post&sujet='.$selectSujetCat[$j]['titre'].'"'?>>
+                                                        <img src=<? echo '"'.$selectSujetCat[$j]['photo'].'"'?> class="col-lg-12">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <p><? echo '"'.$selectSujetCat[$j]['def'].'"'?></p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <p class="col-lg-12">Par :</p>
+                                                    avatar
+                                                    <img src=<? echo '"'.$selectSujetCat[$j]['avatar'].'"'?> class="col-lg-12">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php      
+                                    }
+                                }
+                            
+                                else {
+                                    ?>
+                                        <div class="row">
+                                            <h4>Il n'y a aucun sujet à afficher</h4>
+                                            <h4>Créez en un !</h4>
+                                            <br/>
+                                        <div>
+                                    <?php
+                                }
+                            ?>
+
+                            <?php
+                            // posts
+
+                                
+                                if($nbrePost != 0 ){
+                                    ?>
+                                    <div class="separation"> </div>
+
+                                    <?php
+                                    for ($k = 0 ; $k < $nbrePost; $k++){
+                                        
+                                        ?>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-2 text-center">
+                                                        <h3><? echo $selectPost[$k]['pseudo']?></h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="col-lg-12">
+                                                        <?php
+                                                            if(!empty($selectPost[$k]['avatar'])){
+                                                                ?>
+                                                                    <img src=<? echo '"'.$selectPost[$k]['avatar'].'"'?> class="col-lg-12">
+                                                                <?php
+                                                            }
+                                                            else {
+                                                                ?>
+                                                                    <img src="assets/avatar/default.png" class="col-lg-12">
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 ">
+                                                    <p><? echo '"'.$selectPost[$k]['contenu'].'"'?></p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <table>
+                                                            <tr>
+                                                                <td>Publié le :</td>
+                                                                <td><? echo $selectPost[$k]['date_publication']?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>A :</td>
+                                                                <td><? echo $selectPost[$k]['date_publication']?></td>
+                                                            </tr>
+                                                        </table>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>  
+
+
+                                        <?php
+                                        
+                                    }
+                                }
+                                else {
+                                    echo "Il n'y a aucun post à afficher";
+                                    echo "</br>";
+                                    echo "Créez en un !";
+                                }
+                                
+
+                            ?>
+
+
+                </div>
 
 
 
-            ?>
-        </div>
-        <div>
-            <form action="services/sujet_service.php" method="post">
-                <label for="post">Post
-                    <br />
-                    <textarea type="text" id="post" name="post" required ></textarea>
-                </label>
-                <input type="text" name="sujet" value="<? echo $sujet?>" class="hidden">
-                <br />
-                <button type="submit" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-send"></span> Envoyer 
-                </button>
-            </tr>
-        </table>
-    </form>
+
+            </div>
         </div>
     </div>  
 
-    <div> <!--corp de page-->
-
-        <?php
-
-            // sujet
-            $connect = new pdo_connect();
-            $selectSujetCat = $connect -> selectSujetByTitre($sujet);
-
-            $nbreSuj = count($selectSujetCat);
-
-            if($nbreSuj != 0 ){
-
-                for ($j = 0 ; $j < $nbreSuj; $j++){
-
-                    foreach($selectSujetCat[$j] as $key => $value){
-                        if ($key == 'titre'){
-                            echo "<a href='index.php?page=page&sujet=".$value."'>";
-                            echo $value;
-                            echo "</a>";
-                        }
-                        else if ($key == 'photo'){
-                            echo '<img src="'.$value.'" />';
-                        }
-                        else {
-                            echo "</br>";
-                            echo $key;
-                            echo "</br>";
-                            echo $value;
-                            echo "</br>";
-                        }
-                        
-                    }
-                }
-            }
-            else {
-                echo "Il n'y a aucun sujet à afficher";
-                echo "</br>";
-                echo "Créez en un !";
-            }
-
-
-
-
-
-            // posts
-
-            $connect = new pdo_connect();
-            $selectPost = $connect -> selectPost($sujet);
-            
-            
-
-            $nbrePost = count($selectPost);
-
-            if($nbrePost != 0 ){
-                
-                for ($k = 0 ; $k < $nbrePost; $k++){
-
-                    foreach($selectPost[$k] as $key => $value){
-                    
-                        echo "</br>";
-                        echo $key;
-                        echo "</br>";
-                        echo $value;
-                        echo "</br>";
-                    
-                    }
-                }
-            }
-            else {
-                echo "Il n'y a aucun post à afficher";
-                echo "</br>";
-                echo "Créez en un !";
-            }
-            
-
-        ?>
-
-
-    </div>
+    
 
 
 

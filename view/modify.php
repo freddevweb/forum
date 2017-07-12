@@ -1,12 +1,11 @@
 <?php
     
-    $_SESSION['name'] = 'Alfonso';
 
     $err = $_SESSION['erreur'];
-    $peudo = $_SESSION['name'];
+    $user = $_SESSION['name'];
 
     $connect = new pdo_connect();
-    $selectUser = $connect -> getProfil ($peudo);
+    $selectUser = $connect -> getProfil ($user);
 
     $connected = $connect -> isConnected($user);
 

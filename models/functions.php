@@ -155,7 +155,7 @@
 
             $connexion = $this->init();
 
-            $post = $connexion -> prepare ("SELECT p.titre, p.contenu, p.date_publication, u.pseudo, u.avatar FROM Post AS p INNER JOIN Utilisateur AS u ON u.id = p.auteur_id WHERE sujet_id = (SELECT id FROM Sujet WHERE titre = :titre ) ORDER BY p.date_publication");
+            $post = $connexion -> prepare ("SELECT p.contenu, p.date_publication, u.pseudo, u.avatar FROM Post AS p INNER JOIN Utilisateur AS u ON u.id = p.auteur_id WHERE sujet_id = (SELECT id FROM Sujet WHERE titre = :titre ) ORDER BY p.date_publication");
             $post -> execute(array(
                 'titre' => $sujet
             ));

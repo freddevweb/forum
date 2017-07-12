@@ -1,12 +1,5 @@
 <?php
 
-    $user = $_SESSION['name'];
-    $cat = $_GET['cat'];
-
-    $connect = new pdo_connect();
-    $connected = $connect -> isConnected($user);
-
-
     if($connected === FALSE){
         header("location:index.php?page=accueil");
     }
@@ -38,30 +31,33 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <legend>Catégories :</legend>
+
+                            <ul class="list-unstyled">
                             <?php
 
-                            $connect = new pdo_connect();
-                            $selectCat = $connect -> selectCategorie();
-                            
+                                for ($i = 0 ; $i < $nbreCat; $i++){
 
-                            $nbreCat = count($selectCat);
-
-                            echo '<ul class="list-unstyled">';
-
-                            for ($i = 0 ; $i < $nbreCat; $i++){
-
-                                foreach($selectCat[$i] as $key => $value){
-                                    echo "<li><a href='index.php?page=sujet&cat=".$value."'>";
-                                    echo "<h4><strong>".$value."</strong></h4>";
-                                    echo "</a></li>";
-                                    
+                                    foreach($selectCat[$i] as $key => $value){
+                                        ?>
+                                            <li>
+                                                <a href=<?php echo '"index.php?page=sujet&cat='.$value.'"' ?>>
+                                                    <h4>
+                                                        <strong>
+                                                            <?php echo $value; ?>
+                                                        </strong>
+                                                    </h4>
+                                                </a>
+                                            </li>
+                                        <?php
+                                        
+                                    }
                                 }
-                            }
-
-                            echo "</ul>";
-
                             ?>
+                            </ul>
                         </div>
+                    </div>
+                    <div class="row">
+                        <br />
                     </div>
                     <div class="row">
 
@@ -109,63 +105,76 @@
                         <div class="jumbotron">
 
                             <?php
-
-                                $connect = new pdo_connect();
-                                $selectSujetCat = $connect -> selectSujet($cat);
-
                             /***
                              * Alfonso: plutot que d'utiliser des echo il faut jouer avec les balises PHP
                              * pour pas avoir pa faire de écho. Le problème avec les echos c'est aussi qu'on a pas
                              * l'IDE qui peut nous corriger vu que c'est dans le PHP
                              *
                              * aussi avoir des echo dans une page c'est moche!
+                             *
+                             * ==> corrigé, j'espere que c'est bien indenté car j'ai eu du mal!
+
                              */
-
-                                $nbreSuj = count($selectSujetCat);
-
                                 if($nbreSuj != 0 ){
-
                                     for ($j = 0 ; $j < $nbreSuj; $j++){
+                                        ?>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-9">
+                                                        <a href=<? echo '"index.php?page=post&sujet='.$selectSujetCat[$j]['titre'].'"'?> class="text-center">
+                                                            <h3><? echo $selectSujetCat[$j]['titre']?></h3>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <table>
+                                                            <tr>
+                                                                <td>Publié le :</td>
+                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>A :</td>
+                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
 
-                                        foreach($selectSujetCat[$j] as $key => $value){
-                                            if ($key == 'titre'){
-                                                echo "<a href='index.php?page=post&sujet=".$value."'>";
-                                                echo $value;
-                                                echo "</a>";
-                                            }
-                                            else if ($key == 'photo'){
-                                                echo '<img src="'.$value.'" />';
-                                            }
-                                            else {
-                                                echo "</br>";
-                                                echo $key;
-                                                echo "</br>";
-                                                echo $value;
-                                                echo "</br>";
-                                            }
-                                            
-                                        }
+                                                <div class="col-lg-2 ">
+                                                    <a href=<? echo '"index.php?page=post&sujet='.$selectSujetCat[$j]['titre'].'"'?>>
+                                                        <img src=<? echo '"'.$selectSujetCat[$j]['photo'].'"'?> class="col-lg-12">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <p><? echo '"'.$selectSujetCat[$j]['def'].'"'?></p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <p class="col-lg-12">Par :</p>
+                                                    avatar
+                                                    <img src=<? echo '"'.$selectSujetCat[$j]['avatar'].'"'?> class="col-lg-12">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php      
                                     }
                                 }
-                                else {
-                                    echo "Il n'y a aucun sujet à afficher";
-                                    echo "</br>";
-                                    echo "Créez en un !";
-                                }
-                                
-
+                            
+                            else {
+                                ?>
+                                    <div class="row">
+                                        <h4>Il n'y a aucun sujet à afficher</h4>
+                                        <h4>Créez en un !</h4>
+                                        <br/>
+                                    <div>
+                                <?php
+                            }
                             ?>
 
 
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
             </div>
         </div>
     </div>
