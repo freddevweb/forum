@@ -48,6 +48,7 @@
             ));
         }
 
+
         public function controlPseudo( $pseudo){
             
 
@@ -61,6 +62,7 @@
             return $control;
         }
 
+
         public function login ($pseudo, $pass){
 
             $connexion = $this->init();
@@ -70,7 +72,7 @@
 
             $passctrl = $getPass -> fetch();
 
-            if (sha256("sha256" ,$passctrl['uPassword']) ==  $pass){
+            if (hash("sha256", $pass) ==  $passctrl['uPassword']){
                 $flagsession = TRUE;
             }
             else{
@@ -80,6 +82,7 @@
             return $flagsession;
 
         }
+
 
         public function enregistrerAvatar( $pseudo, $avatar){
 
@@ -91,7 +94,6 @@
                 'user' => $pseudo
             ));
         }
-
 
 
         public function selectCategorie(){
@@ -106,6 +108,7 @@
             return $cat;
 
         }
+
 
         public function selectSujet($cat){
 
@@ -125,6 +128,7 @@
             return $suj;
 
         }
+
 
         public function selectSujetByTitre($sujetNom){
 
@@ -161,6 +165,7 @@
             
         }
 
+
         public function postSend ($user, $post, $sujet ){
 
             $connexion = $this->init();
@@ -173,6 +178,7 @@
             ));
 
         }
+
 
         public function getProfil ($user){
 
@@ -188,67 +194,40 @@
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    ******************************************
-*/
-/*
-        public function edit ($id=FALSE) {
-
+        public function remplacerProfil($nom, $pseudo, $email, $pass){
             $connexion = $this->init();
 
-            if ($id == false ){
+            $pdo = $connexion -> prepare ("UPDATE Utilisateur SET pseudo =:pseudo, email=:email, uPassword=:pass, dateInscription=NOW() WHERE id = (SELECT id FROM Utilisateur WHERE pseudo = :nom");
+            $pdo->execute(array(
+                'pseudo' => $pseudo,
+                'email' =>$email,
+                'pass'=>$pass,
+                'nom'=>$nom
+            ));
+        }
 
-                $object = $connexion->prepare('SELECT nom, prenom, email, age, langue, id FROM etudiants ORDER BY nom');
-                $object->execute();
-                
-            }else{
-                $object = $connexion->prepare('SELECT nom, prenom, email, age, langue, id FROM etudiants where id=:id');
-                $object->execute( array( 'id' => $id ) );
+
+        public function isConnected ($pseudo){
+            $connexion = $this->init();
+
+            $connected = $connexion -> prepare ("SELECT id, email  FROM Utilisateur WHERE pseudo =:pseudo");
+            $connected->execute(array(
+                'pseudo' => $pseudo,
+            ));
+
+            $isConnect = $connected->fetch();
+            
+            $flagConnection = FALSE;
+
+            if ( !empty($isConnect['id']) && !empty($isConnect['email']) ){
+
+                $flagConnection = TRUE;
 
             }
 
-            $etudiants = $object->fetchAll(PDO::FETCH_ASSOC);
-            return $etudiants;
+            return $flagConnection;
+
         }
-
-        public function todelete ($id){
-
-            $connexion = $this->init();
-
-            $pdo = $connexion -> prepare ('DELETE FROM etudiants where id=:id');
-            $pdo->execute(array(
-                'id'=>$id
-            ));
-        }
-
-        public function update ($id, $nom, $prenom, $email, $age, $langue){
-
-            $connexion = $this->init();
-            
-            $pdo = $connexion -> prepare ('UPDATE etudiants set nom =:moi, prenom=:prenom, email=:email, age=:age, langue=:langue where id=:id');
-            $pdo->execute(array(
-                'moi' => $nom,
-                'prenom' =>$prenom,
-                'email'=>$email,
-                'age'=>$age,
-                'langue'=>$langue,
-                'id'=>$id
-            ));
-        }*/
 
 
 

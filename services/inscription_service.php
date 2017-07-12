@@ -57,6 +57,9 @@
       * */
     if ( empty($erreur) ){
 
+        // pass word hachage ////////////////////////////////////////////////////////////////////////////////
+        $pass = hash(hash("sha256", $pass));
+
         $connect = new pdo_connect();
         $record = $connect -> enregistrer($pseudo, $email, $pass);
 

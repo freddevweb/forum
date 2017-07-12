@@ -29,7 +29,7 @@ CREATE TABLE Utilisateur (
 	id INT UNSIGNED AUTO_INCREMENT,
 	pseudo VARCHAR(100) NOT NULL,
 	email VARCHAR(200) NOT NULL,
-	uPassword CHAR(64) NOT NULL,  -- le mot de passe sera hashé avec sha1, ce qui donne toujours une chaîne de 40 caractères
+	uPassword CHAR(100) NOT NULL,  
     avatar varchar(255),
     dateInscription date,
     
@@ -98,10 +98,10 @@ ON Categorie(nom);
 
 
 INSERT INTO Utilisateur (pseudo, email, uPassword, avatar, dateInscription) VALUES
-('Pierre', 'Pierre@email.com', 'mar', '' , '2010-04-02' ),
-('Paul', 'Paul@email.com', 'mar', '' , '2010-04-02'),
-('Alfonso', 'Alfonso@email.com', 'fernandez', '' , '2010-04-02'),
-('Fred', 'Fred@email.com', 'mas', '' , '2010-04-02');
+('Pierre', 'Pierre@email.com', '0557fca5f57f060f2e4b804cbd8d59a125e6066652b8e6fc1dda265935e0db83', '' , '2010-04-02' ),
+('Paul', 'Paul@email.com', '0557fca5f57f060f2e4b804cbd8d59a125e6066652b8e6fc1dda265935e0db83', '' , '2010-04-02'),
+('Alfonso', 'Alfonso@email.com', 'f58ed1e2df2863f580a31c0d15473852c762037f8536de12a03cf9c624e440b9', 'assets/avatar/Alfonso.jpg' , '2010-04-02'),
+('Fred', 'Fred@email.com', '8683c59d89353ec111a2cca2704a60d3f151d59657e8d32bae2fc12b710bc1fb', '' , '2010-04-02');
 
 -- Insertion de categories
 

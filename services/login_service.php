@@ -15,12 +15,11 @@
         $connect = new pdo_connect();
         $control = $connect -> login ($pseudo, $pass);
 
-
         if ($control == TRUE){
             $_SESSION['name'] = $pseudo;
             $link = "../index.php?page=categorie";
         }
-        else{
+        else if ($control == FALSE){
             $link = "../index.php?page=accueil";
             $_SESSION['message'] = "Identifiant ou mot de passe invalide.";
         }

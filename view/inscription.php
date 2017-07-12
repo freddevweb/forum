@@ -1,7 +1,9 @@
 <?php
     
     $err = $_SESSION['erreur'];
-
+    if (isset($_SESSION['name'])){
+        $name = ;
+    }
 ?>
 
 <!DOCTYPE html>

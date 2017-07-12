@@ -48,8 +48,10 @@
             </form>
         </div>
         <div>
-            <a href="index.php?page=signin">
-                <p>S'inscrire<p>
+            <a href="index.php?page=signin" title="S'inscrire">
+                <button type="button" class="btn btn-default btn-sm">
+                    Sign in
+                </button>
             </a>
         </div>
     </div>

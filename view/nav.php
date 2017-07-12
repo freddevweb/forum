@@ -12,7 +12,13 @@
       <li> <a href="index.php?page=accueil">Accueil</a> </li>
       <li> <a href="index.php?page=categorie">Catégories</a></li> 
       <li> <a href="index.php?page=profil">Profil</a> </li>
+      <li> 
+        <a href="services/kill_session_service.php" title="Log out">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a> 
+      </li>
     </ul>
+    
     <form class="navbar-form navbar-right" role="form">
       <div class="input-group">
         <input type="text" style="width:150px" class="input-sm form-control" placeholder="Recherche">

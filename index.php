@@ -8,14 +8,14 @@
 /*
     * faire le retour des erreurs de modify
     * faire le retour des erreurs de avatar
-    * faire verif si loggé pour pas faire d'inscription
-    * faire la page profil pour modifier les données utilisateur
     * cacher les inputs qui ne doivent pas etre montrés
     * indiquer en chemin type arbo le groupe et le sujet
 
 */
 
 session_start();
+
+
 
 
 include_once("models/functions.php"); // appelle la page fonction
@@ -51,6 +51,9 @@ include_once("models/functions.php"); // appelle la page fonction
                 break;
             case 'profil' :
                 include("view/profil.php");
+                break;
+            case 'modify' :
+                include("view/modify.php");
                 break;
         }
 

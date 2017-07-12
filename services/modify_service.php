@@ -4,7 +4,7 @@
     
     include "../models/functions.php";
 
-
+    $nom = $_SESSION['name'];
 
     $avatar = $_POST['avatar'];
     $erreur = array();
@@ -47,7 +47,9 @@
             $erreur[] = $err0;
         }
         
-        $link = "../index.php?page=inscription";
+        $link = "../index.php?page=modify";
+
+        
 
     }
 
@@ -55,25 +57,19 @@
      
     if ( empty($erreur) ){
 
+        // pass word hachage ////////////////////////////////////////////////////////////////////////////////
+        $pass = hash(hash("sha256", $pass));
+
         $connect = new pdo_connect();
-        $record = $connect -> enregistrer($pseudo, $email, $pass);
-
-        if(  $avatar == 'on' ){
-
-            $link = "../index.php?page=avatar";
-            $_SESSION['name']= $pseudo;
-            
-        }
-        else {
-            session_destroy();
-            $link = "../index.php?page=accueil";
-        }
+        $record = $connect -> remplacerProfil($nom, $pseudo, $email, $pass);
+        $link = "../index.php?page=accueil";
+        session_destroy();
     }
     else {
 
         $_SESSION['erreur'] = $erreur;
 
-        $link = "../index.php?page=inscription";
+        $link = "../index.php?page=modify";
     }
 
 

@@ -2,7 +2,15 @@
 
     $user = $_SESSION['name'];
 
+    $connect = new pdo_connect();
+    $connected = $connect -> isConnected($user);
+
+
+    if($connected === FALSE){
+        header("location:index.php?page=accueil");
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,35 +28,47 @@
         <? include "nav.php";  ?>
     </div>
     
-    <div>
-        <p>Bienvenue <?php  echo $user;  ?></p>
-    </div>
+    <section class="container">
+        <div>
+            <p>Bienvenue <?php  echo $user;  ?></p>
+        </div>
 
-    <div>
-        <?php
+        <div class="jumbotron">
 
-        $connect = new pdo_connect();
-        $selectCat = $connect -> selectCategorie();
-        
+            <div class="row">
+                <h2 class="text-center">Liste des catégories</h2>
+                <?php
 
-        $nbre = count($selectCat);
-
-        for ($i = 0 ; $i < $nbre; $i++){
-
-            foreach($selectCat[$i] as $key => $value){
-                echo "<a href='index.php?page=sujet&cat=".$value."'>";
-                echo $value;
-                echo "</a>";
-                echo "</br>";
+                $connect = new pdo_connect();
+                $selectCat = $connect -> selectCategorie();
                 
-            }
-        }
+
+                $nbre = count($selectCat);
+
+                for ($i = 0 ; $i < $nbre; $i++){
+                    
+                    ?>
+                    <div class="col-lg-3">
+                    <?php
+
+                    foreach($selectCat[$i] as $key => $value){
+                        echo "<a href='index.php?page=sujet&cat=".$value."'>";
+                        echo "<h3>".$value."<h3>";
+                        echo "</a>";
+                        echo "</br>";
+                        
+                    }
+                    ?>
+                    </div>
+                    <?php
+                }
 
 
 
-        ?>
-    </div>  
-
+                ?>
+            </div>
+        </div> 
+    </section>
 
 
 

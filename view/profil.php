@@ -4,6 +4,13 @@
     $connect = new pdo_connect();
     $selectUser = $connect -> getProfil ($user);
 
+    
+    $connected = $connect -> isConnected($user);
+
+    if($connected === FALSE){
+        header("location:index.php?page=accueil");
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +47,7 @@
                 
                 <div class="col-lg-12">
                     <br />
-                    <a href="#" class="btn btn-info btn-lg">
+                    <a href="index.php?page=avatar" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                 </div>
@@ -68,7 +75,7 @@
 
                 <div class="col-lg-12 text-center">
                     <br />
-                    <a href="#" class="btn btn-info btn-lg">
+                    <a href="index.php?page=modify" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                 </div>

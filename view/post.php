@@ -3,6 +3,14 @@
     $user = $_SESSION['name'];
     $sujet = $_GET['sujet'];
 
+    $connect = new pdo_connect();
+    $connected = $connect -> isConnected($user);
+
+
+    if($connected === FALSE){
+        header("location:index.php?page=accueil");
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +62,7 @@
                     <br />
                     <textarea type="text" id="post" name="post" required ></textarea>
                 </label>
-                <input type="text" name="sujet" value="<? echo $sujet?>" >
+                <input type="text" name="sujet" value="<? echo $sujet?>" class="hidden">
                 <br />
                 <button type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-send"></span> Envoyer 
