@@ -6,6 +6,8 @@
 
 
     /*
+        * pas fini mais bien avancé. je pense qu'il ne panque pas grand chose
+
         * faire le retour des erreurs de modify
         * faire le retour des erreurs de avatar
         * indiquer en chemin type arbo le groupe et le sujet
@@ -78,6 +80,8 @@
                 include("view/post.php");
                 break;
             case 'profil' :
+                $selectUser = $connect -> getProfil ($user);
+
                 include("view/profil.php");
                 break;
             case 'modify' :

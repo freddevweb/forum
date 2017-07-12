@@ -12,8 +12,8 @@
     if ( isset( $_POST['titre']) && isset( $_POST['def']) ){
 
         
-        $post = htmlspecialchar($_POST['titre']);
-        $def = htmlspecialchar($_POST['def']);
+        $post = htmlspecialchars($_POST['titre']);
+        $def = htmlspecialchars($_POST['def']);
 
         
         

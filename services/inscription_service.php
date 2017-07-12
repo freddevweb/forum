@@ -10,10 +10,10 @@
     $erreur = array();
 
     if(!empty($_POST['pseudo']) &&  !empty($_POST['email']) && !empty($_POST['pass']) && !empty($_POST['passConfirm']) ){
-        $pseudo = $_POST['pseudo'] ;
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-        $passconfirm = $_POST['passConfirm'];
+        $pseudo = htmlspecialchars($_POST['pseudo']);
+        $email = htmlspecialchars($_POST['email']);
+        $pass = htmlspecialchars($_POST['pass']);
+        $passconfirm = htmlspecialchars($_POST['passConfirm']);
 
         $pseudoLength = strlen($pseudo);
 

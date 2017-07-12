@@ -7,12 +7,13 @@
 
     include "../models/functions.php";
 
-
     if ( isset( $_POST['post']) ){
 
-        
-        $post = htmlspecialchar($_POST['post']);
-        $sujet = htmlspecialchar($_POST['sujet']);
+        $tempPost = $_POST['post'];
+
+
+        $post = htmlspecialchars($_POST['post']);
+        $sujet = $_POST['sujet'];
         
         $connect = new pdo_connect();
         $control = $connect -> postSend ($user, $post, $sujet );

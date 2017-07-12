@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +56,11 @@
     <div>
         <?php
             if (isset($_SESSION['message'])){
-                echo "<p>".$_SESSION['message']."</p>";
+                ?>
+                    <p>
+                        <? $_SESSION['message'] ?>
+                    </p>
+                <?php
             }
         ?>
     </div>

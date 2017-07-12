@@ -11,11 +11,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title><? echo $sujet ?></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
     <div>
@@ -62,7 +62,7 @@
 
                         <div class="col-lg-12">
 
-                            <form action="services/sujet_service.php" method="post">
+                            <form action="services/post_service.php" method="post">
                                 <legend>Commenter :</legend>
                                 <div class="form-group">
                                     <label for="post">Post</label>
@@ -102,11 +102,11 @@
                                                         <table>
                                                             <tr>
                                                                 <td>Publié le :</td>
-                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                                <td><? date( "d/m/Y" ,echo $selectSujetCat[$j]['dateCreation'])?></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>A :</td>
-                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                                <td><? date( "G:i" ,echo $selectSujetCat[$j]['dateCreation'])?></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -122,8 +122,18 @@
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <p class="col-lg-12">Par :</p>
-                                                    avatar
-                                                    <img src=<? echo '"'.$selectSujetCat[$j]['avatar'].'"'?> class="col-lg-12">
+                                                    <?php
+                                                        if(!empty($selectSujetCat[$j]['avatar'])){
+                                                            ?>
+                                                                <img src=<? echo '"'.$selectSujetCat[$j]['avatar'].'"' ?>  class="col-lg-8 col-lg-offset-2"/>
+                                                            <?php
+                                                        }
+                                                        else {
+                                                            ?>
+                                                                <img src="assets/avatar/default.png" class="col-lg-8 col-lg-offset-2">
+                                                            <?php
+                                                        }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>

@@ -130,11 +130,11 @@
                                                         <table>
                                                             <tr>
                                                                 <td>Publié le :</td>
-                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                                <td><? echo date( "d/m/Y" ,$selectSujetCat[$j]['dateCreation'])?></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>A :</td>
-                                                                <td><? echo $selectSujetCat[$j]['dateCreation']?></td>
+                                                                <td><? echo date( "G:i" ,$selectSujetCat[$j]['dateCreation'])?></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -150,13 +150,26 @@
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <p class="col-lg-12">Par :</p>
-                                                    avatar
-                                                    <img src=<? echo '"'.$selectSujetCat[$j]['avatar'].'"'?> class="col-lg-12">
+                                                    <p class="col-lg-12 text-center"><? echo $selectSujetCat[$j]['pseudo']?></p>
+                                                    <div class="col-lg-12 text-center">
+                                                    <?php
+                                                        if(!empty($selectSujetCat[$j]['avatar'])){
+                                                            ?>
+                                                                <img src=<? echo '"'.$selectSujetCat[$j]['avatar'].'"' ?>  class="col-lg-8 col-lg-offset-2"/>
+                                                            <?php
+                                                        }
+                                                        else {
+                                                            ?>
+                                                                <img src="assets/avatar/default.png" class="col-lg-8 col-lg-offset-2">
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <?php      
+                                        <?php 
                                     }
                                 }
                             

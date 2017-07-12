@@ -1,5 +1,4 @@
 <?php
-
     if($connected === FALSE){
         header("location:index.php?page=accueil");
     }
@@ -31,22 +30,14 @@
 
             <div class="row">
                 <h2 class="text-center">Liste des catégories</h2>
-                <?php               
-
+                <?php
                     for ($i = 0 ; $i < $nbre; $i++){
                         
                         ?>
                         <div class="col-lg-3">
-                        <?php
-
-                        foreach($selectCat[$i] as $key => $value){
-                            echo "<a href='index.php?page=sujet&cat=".$value."'>";
-                            echo "<h3>".$value."<h3>";
-                            echo "</a>";
-                            echo "</br>";
-                            
-                        }
-                        ?>
+                            <a href=<? echo '"index.php?page=sujet&cat='.$selectCat[$i]['nom'].'"'?>>
+                                <h3><? echo $selectCat[$i]['nom'] ?><h3>
+                            </a>
                         </div>
                         <?php
                     }

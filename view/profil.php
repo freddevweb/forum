@@ -2,14 +2,9 @@
 /**
  * Alfonso: Ces controles et appel en base de données doivent être dans le controleur
  *
+ * => note prise en compte !
  */
-    $user = $_SESSION['name'];
 
-    $connect = new pdo_connect();
-    $selectUser = $connect -> getProfil ($user);
-
-    
-    $connected = $connect -> isConnected($user);
 
     if($connected === FALSE){
         header("location:index.php?page=accueil");
@@ -40,10 +35,14 @@
                     
                     <?php
                         if(!empty($selectUser['avatar'])){
-                            echo '<img src="'.$selectUser['avatar'].'" width="200px" />';
+                            ?>
+                                <img src=<? echo $selectUser['avatar'] ?> />
+                            <?php
                         }
                         else {
-                            echo '<img src="assets/avatar/default.png"';
+                            ?>
+                                <img src="assets/avatar/default.png">
+                            <?php
                         }
                     ?>
                     
