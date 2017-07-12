@@ -112,8 +112,14 @@
 
                                 $connect = new pdo_connect();
                                 $selectSujetCat = $connect -> selectSujet($cat);
-                                
-                                
+
+                            /***
+                             * Alfonso: plutot que d'utiliser des echo il faut jouer avec les balises PHP
+                             * pour pas avoir pa faire de écho. Le problème avec les echos c'est aussi qu'on a pas
+                             * l'IDE qui peut nous corriger vu que c'est dans le PHP
+                             *
+                             * aussi avoir des echo dans une page c'est moche!
+                             */
 
                                 $nbreSuj = count($selectSujetCat);
 

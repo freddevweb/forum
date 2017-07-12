@@ -1,4 +1,8 @@
 <?php
+/**
+ * Alfonso: Ces controles et appel en base de données doivent être dans le controleur
+ *
+ */
     $user = $_SESSION['name'];
 
     $connect = new pdo_connect();

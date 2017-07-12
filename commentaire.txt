@@ -1,0 +1,5 @@
+
+
+/***
+* Alfonso: très bien dans l'ensemble juste quelques petits trucs à régler
+* voir les commentaires dans les différents fichiers.

@@ -15,7 +15,19 @@
 
 session_start();
 
-
+/***
+ * Alfonso: Attention tous les appels en base de données doivent être fait depuis le controleur
+ * plutot que dans les templates (c'est à dire les views)!!!
+ *
+ *
+ * Par exemple:
+ *                  $connect = new pdo_connect();
+ *                  $selectCat = $connect -> selectCategorie();
+ *
+ * doit être dans le controleur
+ *
+ *
+ */
 
 
 include_once("models/functions.php"); // appelle la page fonction
