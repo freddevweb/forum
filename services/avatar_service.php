@@ -35,10 +35,6 @@
                 $link = "../index.php?page=accueil";
             }
         }else{
-            /* Alfonso: je suppose que ces echo sont temporaires
-             * il faut évidemment rapporté ça au user au niveau du formulaire.
-             fred : c'etait juste pour avoir un retour comme l'exemple du cours et pouvoir mettre a la place de l'(echo) une variable message
-             * */
             $msg = 'Erreur fichier trop gros';
             $link = "../index.php?page=avatar";
         }

@@ -17,6 +17,12 @@
 
         $pseudoLength = strlen($pseudo);
 
+        /**
+         * Alfonso: Peut-être ce bazarre regex aurais pu être dans un autre objet.
+         * Par exemple dans un objet appelé Helper ou controlHelper{}
+         * car tu as pu constater que tu t'en resert dans un autre service
+         */
+
         $regex = '#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#';
 
         // pseudo sup 4 caracters /////////////////////////////////////////////////////////////////////////////
@@ -52,12 +58,17 @@
     }
 
 
-     /*Alfonso: très bon controles.
-        cool merci !!
+     /***
+      * Alfonso: très bon controles.
+      * comme j'ai dis la dernière fois les contrôles sont cool car ils s'accumule. Il fallait éviter le piège
+      * des if imbriqués.
       * */
     if ( empty($erreur) ){
 
         // pass word hachage ////////////////////////////////////////////////////////////////////////////////
+        /**
+         * Alfonso: t'avais oublié de rallonger les 64 caractères en base de données.
+         */
         $pass = hash(hash("sha256", $pass));
 
         $connect = new pdo_connect();

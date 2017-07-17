@@ -1,4 +1,7 @@
 <?php
+/**
+ * Alfonso: Ce contrôle aurait dû être dans le controleur
+ */
     if($connected === FALSE){
         header("location:index.php?page=accueil");
     }

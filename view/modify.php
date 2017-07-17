@@ -1,5 +1,7 @@
 <?php
-    
+/**
+ * Tout ceci dans le controleur! <--
+ */
 
     $err = $_SESSION['erreur'];
     $user = $_SESSION['name'];

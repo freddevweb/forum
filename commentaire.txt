@@ -3,3 +3,6 @@
 /***
 * Alfonso: très bien dans l'ensemble juste quelques petits trucs à régler
 * voir les commentaires dans les différents fichiers.
+*
+* UPDATE: Bien sur l'ensemble on peut toujours paufiné on verra ça ensemble
+* Relis bien ce que je t'ai mis maintenant j'ai eu un peu plus le temps de relire.

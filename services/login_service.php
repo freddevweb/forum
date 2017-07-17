@@ -10,12 +10,16 @@
         
         $pseudo = htmlspecialchars($_POST['user']);
         $password = htmlspecialchars($_POST['pass']);  
-        $pass = hash("sha256",$password);// 64 caracteres
+        $password = hash("sha256",$password);// 64 caracteres
 
         $connect = new pdo_connect();
-        $control = $connect -> login ($pseudo, $pass);
+        $control = $connect -> login ($pseudo, $password);
 
         if ($control == TRUE){
+            /**
+             * Alfonso:
+             * ici j'aurais setter l'id plutôt que le pseudo. ou peut être
+             */
             $_SESSION['name'] = $pseudo;
             $link = "../index.php?page=categorie";
         }

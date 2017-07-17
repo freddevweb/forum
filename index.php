@@ -31,7 +31,11 @@
     */
     include_once("models/functions.php");
 
-    $user = $_SESSION['name'];
+    if(isset($_SESSION['name'])){
+        $user = $_SESSION['name'];
+    }else{
+        $user = "";
+    }
 
     $connect = new pdo_connect();
     $connected = $connect -> isConnected($user);

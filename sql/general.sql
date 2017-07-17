@@ -116,7 +116,7 @@ CREATE TABLE `utilisateur` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(100) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `uPassword` char(40) NOT NULL,
+  `uPassword` varchar(64) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `dateInscription` date DEFAULT NULL,
   PRIMARY KEY (`id`),

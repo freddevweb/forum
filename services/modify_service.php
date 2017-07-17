@@ -62,6 +62,11 @@
 
         $connect = new pdo_connect();
         $record = $connect -> remplacerProfil($nom, $pseudo, $email, $pass);
+        /**
+         * Alfonso: un exemple ici c'est dans record si tu as un retour de un c'est que ton remplacement a bien été
+         * effectué. Sinon il faut dire à l'utilisateur que l'écriture en base de données n'a pas pu être faite.
+         */
+
         $link = "../index.php?page=accueil";
         session_destroy();
     }
