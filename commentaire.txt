@@ -6,3 +6,5 @@
 *
 * UPDATE: Bien sur l'ensemble on peut toujours paufiné on verra ça ensemble
 * Relis bien ce que je t'ai mis maintenant j'ai eu un peu plus le temps de relire.
+
+* NOTE: je n'ai pas testé toutes les fonctionnalités des services
